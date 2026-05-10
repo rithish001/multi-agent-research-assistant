@@ -15,9 +15,10 @@ if st.button("Run Research"):
         st.write("### 🔄 Processing...\n")
 
         response = requests.post(
-            "http://127.0.0.1:8000/research/stream",
+            #"http://127.0.0.1:8000/research/stream",
+            "http: // backend: 8000",
             json={"query": query},
-            stream=True  # 🔥 IMPORTANT
+            stream=True
         )
 
         output_box = st.empty()  # placeholder
