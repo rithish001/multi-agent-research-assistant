@@ -8,9 +8,9 @@ from agents.writer import writer_agent
 from memory.vector_store import store_memory, retrieve_memory
 from tools.search_tool import search_web   # ✅ NEW
 
-# -------------------------------
-# STATE DEFINITION
-# -------------------------------
+
+# State Definition
+
 class AgentState(dict):
     """
     Expected keys:
@@ -22,18 +22,18 @@ class AgentState(dict):
     """
     pass
 
-# NODES
+# Nodes
 
 def researcher_node(state: AgentState):
     query = state["query"]
 
-    # ✅ Retrieve past memory
+    # Retrieve past memory
     past_memory = retrieve_memory(query)
 
-    # ✅ Web search (REAL TOOL USAGE)
+    # (REAL_TOOL_USAGE)
     web_results = search_web(query)
 
-    # ✅ Combine all context
+    # Combine
     combined_input = f"""
     You are a research agent.
 
@@ -73,7 +73,7 @@ def fact_checker_node(state: AgentState):
     summary = state["summary"]
     query = state["query"]
 
-    # ✅ Optional: re-check using web (stronger validation)
+    # stronger validation
     verification_data = search_web(query)
 
     checked = fact_checker_agent(f"""
@@ -113,13 +113,13 @@ def writer_node(state: AgentState):
     - Include key points
     """)
 
-    # ✅ Store memory
+    # Store memory
     store_memory(query, final_output)
 
     return {**state, "final": final_output}
 
 
-# GRAPH BUILDING
+# Graph building
 
 
 graph = StateGraph(AgentState)
@@ -135,5 +135,5 @@ graph.add_edge("researcher", "summarizer")
 graph.add_edge("summarizer", "fact_checker")
 graph.add_edge("fact_checker", "writer")
 
-# Compile graph
+# Compile
 app = graph.compile()

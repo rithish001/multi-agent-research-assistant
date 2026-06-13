@@ -36,4 +36,4 @@ for query in queries:
 with open("eval/results.json", "w") as f:
     json.dump(results, f, indent=4)
 
-print("\n✅ Benchmark completed")
+print("\n Benchmark completed")
