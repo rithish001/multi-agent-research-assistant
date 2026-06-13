@@ -30,35 +30,3 @@ def stream_research(request: QueryRequest):
     )
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-# from fastapi import APIRouter
-# from pydantic import BaseModel
-#
-# from graph.graph_builder import app
-#
-# router = APIRouter()
-#
-# #Pydantic Validation
-# class QueryRequest(BaseModel):
-#     query: str
-#
-# @router.post('/research')
-# def run_research(request: QueryRequest):
-#     result = app.invoke({"query": request.query})
-#
-#     return {
-#         "query": request.query,
-#         "result": result["final"]
-#     }
-
